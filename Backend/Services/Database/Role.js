@@ -9,11 +9,11 @@ module.exports = {
         }
     },
     DATABASE_ENGINE : {
-        create: async (requestData) => {
+        insert: async (requestData) => {
             try {
-                await models.sequelize.query();
+                return await models.sequelize.query(QueryRepository.CUSTOM_QUERIES.ROLE.INSERT(requestData));
             } catch (e) {
-                console.log(`ERR -> Service.User.DATABASE_ENGINE.create() : ${e}`);
+                console.log(`ERR -> Service.User.DATABASE_ENGINE.insert() : ${e}`);
                 throw e;
             }
         },
@@ -32,7 +32,23 @@ module.exports = {
                 console.log(`ERR -> Service.User.DATABASE_ENGINE.getAll() : ${e}`);
                 throw e;
             }
-        }
+        },
+        update: async (requestData) => {
+            try {
+                return await models.sequelize.query(QueryRepository.CUSTOM_QUERIES.ROLE.UPDATE(requestData));
+            } catch (e) {
+                console.log(`ERR -> Service.User.DATABASE_ENGINE.update() : ${e}`);
+                throw e;
+            }
+        },
+        delete: async (requestData) => {
+            try {
+                return await models.sequelize.query(QueryRepository.CUSTOM_QUERIES.ROLE.DELETE(requestData));
+            } catch (e) {
+                console.log(`ERR -> Service.User.DATABASE_ENGINE.get() : ${e}`);
+                throw e;
+            }
+        },
     }
 
 };

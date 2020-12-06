@@ -5,7 +5,9 @@ const authenticator = require('../Middlewares/Authenticator');
 let tableName = Controller.getTableName();
 
 router.get('/', Controller.getAll);
-//router.post('/login', Controller.loginUser);
+router.post('/', Controller.insert);
+router.patch('/', Controller.update);
+router.delete('/', Controller.delete);
 //router.get('/logout', Controller.logoutUser);
 
 /*

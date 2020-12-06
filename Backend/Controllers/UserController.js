@@ -22,7 +22,7 @@ module.exports = {
     getAll: (req, res, next) => {
         Service.DATABASE_ENGINE.getAll(req.query)
         .then((users) => {
-            let response = {status: 201, content: {success:true, users:users}};
+            let response = {status: 201, content: {success:true, users:users[1]}};
             res.status(response.status).json(response.content);
         }).catch((err) => {
             let response = {status: 400, content: {success:false, message:err.message}};

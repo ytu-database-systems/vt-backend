@@ -1,6 +1,13 @@
 const models = require(".")
+const Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     const Role = sequelize.define('Role', {
+        id: {
+            type: DataTypes.INTEGER,
+            field:'id',
+            primaryKey: true,
+            autoIncrement: true
+        },
         name: {
             type: DataTypes.STRING,
             allowNull : false,
@@ -12,10 +19,21 @@ module.exports = (sequelize, DataTypes) => {
         status: {
             type: DataTypes.INTEGER,
             defaultValue: 1
+        },
+        createdAt: {
+            field: 'createdAt',
+            defaultValue: Sequelize.fn('now'),
+            type: DataTypes.DATE
+        },
+        updatedAt: {
+            field: 'updatedAt',
+            defaultValue: Sequelize.fn('now'),
+            type: DataTypes.DATE
         }
     },{
         charset: 'utf8mb4',
         collate: 'utf8mb4_unicode_ci',
+        timestamps: true,
         tableName: 'Roles',
     });
 

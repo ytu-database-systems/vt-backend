@@ -28,7 +28,6 @@ app.use(function (req, res, next) {
 app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : __dirname + '/uploads/',
-    debug:true,
     createParentPath : true
 }));
 
