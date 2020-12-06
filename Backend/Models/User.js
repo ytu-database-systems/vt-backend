@@ -2,7 +2,7 @@ const regexModule = require("../Modules/RegexModule");
 const passwordModule = require("../Modules/PasswordModule");
 //const converter = require("../Modules/turkishToEnglish")
 const models = require(".");
-const { Op } = require('sequelize');
+const Sequelize = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
@@ -32,18 +32,36 @@ module.exports = (sequelize, DataTypes) => {
         },
         username: {
             type: DataTypes.STRING,
-            field: 'username'
+            field: 'username',
+            allowNull: false,
+            validate: {
+                notEmpty: {msg: 'User username cannot be empty.'}
+            }
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                notEmpty: {msg: 'Password cannot be empty.'},
+                notEmpty: {msg: 'User Password cannot be empty.'},
             }
+        },
+        status: {
+            type: DataTypes.INTEGER,
+            defaultValue: 1
         },
         roleId: {
             field: 'roleId',
             type: DataTypes.INTEGER
+        },
+        createdAt: {
+            field: 'createdAt',
+            defaultValue: Sequelize.fn('now'),
+            type: DataTypes.DATE
+        },
+        updatedAt: {
+            field: 'updatedAt',
+            defaultValue: Sequelize.fn('now'),
+            type: DataTypes.DATE
         }
     }, {
         hooks: {
@@ -59,6 +77,7 @@ module.exports = (sequelize, DataTypes) => {
         charset: 'utf8mb4',
         collate: 'utf8mb4_unicode_ci',
         tableName: 'Users',
+        timestamps: true,
         indexes: [
             {unique:true, fields:['username']}
         ]
