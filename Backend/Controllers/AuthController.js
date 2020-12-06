@@ -15,8 +15,8 @@ module.exports = {
                         res.status(response.status).json(response.content);
                     }  else {
                         Service.DATABASE_ENGINE.createUser(req.body)
-                        .then((user) => {
-                            let response = {status: 201, content: {success:true, user:user}};
+                        .then((result) => {
+                            let response = {status: 201, content: {success:true, result:result}};
                             res.status(response.status).json(response.content);
                         }).catch((err) => {
                             let response = {status: 500, content: {success:true, message:err.message}};

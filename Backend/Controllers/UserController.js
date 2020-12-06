@@ -6,9 +6,9 @@ module.exports = {
     },
     get: (req, res, next) => {
         Service.DATABASE_ENGINE.get(req.query)
-        .then((user) => {
-            if (user) {
-                let response = {status: 201, content: {success: true, user: user}};
+        .then((result) => {
+            if (result) {
+                let response = {status: 201, content: {success: true, result: result}};
                 res.status(response.status).json(response.content);
             } else {
                 let response = {status: 400, content: {success:false, message:"ERR_USER_DOESNT_EXISTS"}};
@@ -21,8 +21,8 @@ module.exports = {
     },
     getAll: (req, res, next) => {
         Service.DATABASE_ENGINE.getAll(req.query)
-        .then((users) => {
-            let response = {status: 201, content: {success:true, users:users[1]}};
+        .then((result) => {
+            let response = {status: 201, content: {success:true, result:result[1]}};
             res.status(response.status).json(response.content);
         }).catch((err) => {
             let response = {status: 400, content: {success:false, message:err.message}};

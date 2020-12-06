@@ -1,4 +1,4 @@
-const Service = require('../Services/Database/Role');
+const Service = require('../Services/Database/Station');
 
 module.exports = {
     getTableName: () => {
@@ -11,7 +11,7 @@ module.exports = {
                 let response = {status: 200, content: {success: true, result: result}};
                 res.status(response.status).json(response.content);
             } else {
-                let response = {status: 400, content: {success:false, message:"ERR_ROLE_DOESNT_EXISTS"}};
+                let response = {status: 400, content: {success:false, message:"ERR_STATION_DOESNT_EXISTS"}};
                 res.status(response.status).json(response.content);
             }
         }).catch((err) => {

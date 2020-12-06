@@ -38,8 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         managerId: {
             type: DataTypes.INTEGER,
-            field: "managerId",
-            allowNull: false
+            field: "managerId"
         },
         createdAt: {
             field: 'createdAt',
