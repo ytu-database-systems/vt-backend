@@ -71,20 +71,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     User.ValidateCustom = async (user) => {
-                // firstName Validation
-        return  true;/*regexModule.checkLengthAtLeast(user.firstName, 2) &&
-                regexModule.doesNotContainsAnySpecialChar(user.firstName) &&
-                // lastName Validation
-                regexModule.checkLengthAtLeast(user.lastName, 2) &&
-                regexModule.doesNotContainsAnySpecialChar(user.lastName) &&
-                // middleName Validation if exists else pass true
-                (user.middleName ? regexModule.doesNotContainsAnySpecialChar(user.middleName) : true) &&
-                regexModule.checkLengthAtLeast(user.password, 8) &&
-                regexModule.hasAnyWhiteSpaces(user.password) &&
-                // email Validation
-                regexModule.isEmail(user.email) //&&
-                // phoneNumber verification
-                //regexModule.isValidPhoneNumber(user.phonePrefix, user.phoneNumber)*/
+        return true; // Assume that valid for everything.
     };
     return User;
 };

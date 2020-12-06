@@ -35,6 +35,8 @@ app.use(fileUpload({
 
 app.use("/v1/hello", require('./Routes/hello'));
 app.use("/v1/auth", require('./Routes/auth'));
+app.use("/v1/role", require('./Routes/role'));
+app.use("/v1/user", require('./Routes/user'));
 
 const server =  require('http').Server(app);
 
