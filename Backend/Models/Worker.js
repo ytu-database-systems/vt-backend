@@ -71,11 +71,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         stationId: {
             type: DataTypes.INTEGER,
-            field: "stateId"
+            field: "stationId"
         },
-        stateId: {
+        managerId: {
             type: DataTypes.INTEGER,
-            field: "stateId"
+            field: "managerId"
         },
         createdAt: {
             field: 'createdAt',
@@ -98,12 +98,12 @@ module.exports = (sequelize, DataTypes) => {
         ]
     });
     Worker.associate = function (models) {
-        Worker.belongsTo(models.AvailabilityState, {
-            foreignKey: 'stateId',
-            targetKey: 'id'
-        });
         Worker.belongsTo(models.Station, {
             foreignKey: 'stationId',
+            targetKey: 'id'
+        });
+        Worker.belongsTo(models.Worker, {
+            foreignKey: 'managerId',
             targetKey: 'id'
         });
     };

@@ -16,6 +16,13 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty : {msg: 'Role Name cannot be empty.'}
             }
         },
+        deneme: {
+            type: DataTypes.STRING,
+            field: 'deneme',
+            validate: {
+                notEmpty : {msg: 'Role Name cannot be empty.'}
+            }
+        },
         status: {
             type: DataTypes.INTEGER,
             defaultValue: 1

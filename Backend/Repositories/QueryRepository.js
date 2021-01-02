@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const moment = require('moment');
 const ReservedProperties = ["createdAt", "updatedAt"];
 
 module.exports = {
@@ -18,9 +19,21 @@ module.exports = {
     },
     CUSTOM_QUERIES : {
         GENERAL : {
-            SELECT_SINGLE_BY_ID : (tableName, requestData) => {return `SELECT * FROM "${tableName}" WHERE id='${requestData.id}'`},
-            SELECT_ALL : (tableName) =>  {return `SELECT * FROM "${tableName}"`},
+            SELECT_SINGLE_BY_ID : (tableName, requestData) => {
+                let query = `SELECT * FROM "${tableName}" WHERE id='${requestData.id}'`;
+
+                console.log("SELECT_SINGLE_BY_ID QUERY : ", query);
+                return query;
+            },
+            SELECT_ALL : (tableName) =>  {
+                let query = `SELECT * FROM "${tableName}"`;
+
+                console.log("SELECT_ALL QUERY : ", query);
+
+                return query;
+            },
             INSERT : (tableName, data) => {
+                console.log(data);
                 let dataLength = Object.keys(data).length;
                 let ValuesQuery = "";
                 let i = 0;
@@ -29,9 +42,16 @@ module.exports = {
                     ValuesQuery += "'" + Object.values(data)[i] + "', ";
                     i++;
                 }
+                console.log("VALUES_Query : ", ValuesQuery)
                 ValuesQuery += "'" + Object.values(data)[dataLength-1] + "'";
+                console.log("VALUES_Query : ", ValuesQuery)
 
-                return `INSERT INTO "${tableName}" ( ${Object.keys(data).join(', ')} ) VALUES(${ValuesQuery});`
+
+                let query = `INSERT INTO "${tableName}" ( ${Object.keys(data).map(a => `"${a}"`).join(', ')} ) VALUES(${ValuesQuery});`
+
+                //console.log("UPDATE QUERY : ", query);
+
+                return query;
             },
             UPDATE : (tableName, data) => {
                 let dataLength = Object.keys(data).length;
@@ -43,20 +63,22 @@ module.exports = {
                         i++;
                         continue;
                     }
-                    ValuesQuery += `${Object.keys(data)[i]} = '${Object.values(data)[i]}',
+                    ValuesQuery += `${Object.keys(data).map(a => `"${a}"`)[i]} = '${Object.values(data)[i]}',
                             `;
                     i++;
                 }
                 ValuesQuery += `"updatedAt" = now()`;
-                console.log("QUERY : ", `UPDATE "${tableName}" SET 
+
+                let query = `UPDATE "${tableName}" SET 
                             ${ValuesQuery}
-                            WHERE id=${data.id}`);
-                return `UPDATE "${tableName}" SET 
-                            ${ValuesQuery}
-                            WHERE id=${data.id}`
+                            WHERE id=${data.id}`;
+
+                console.log("UPDATE QUERY : ", query);
+
+                return query;
             },
             DELETE: (tableName, data) => {
-                let dataLength = Object.keys(data).length;
+                /*let dataLength = Object.keys(data).length;
                 let WhereQuery = "";
                 let i = 0;
                 if (dataLength === 1)
@@ -69,12 +91,13 @@ module.exports = {
                     }
                     WhereQuery += `${Object.keys(data)[dataLength - 1]} = '${Object.values(data)[dataLength - 1]}'
                             `;
-                }
+                }*/
 
-                console.log("QUERY : ", `DELETE FROM "${tableName}"
-                        WHERE id=${data.id}`);
-                return `DELETE FROM "${tableName}"
-                        WHERE ${WhereQuery}`
+                let query = `DELETE FROM "${tableName}" WHERE id=${data.id}`;
+
+                console.log("DELETE QUERY : ", query);
+
+                return query;
             }
 
         },

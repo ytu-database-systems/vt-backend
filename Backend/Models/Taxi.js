@@ -50,10 +50,6 @@ module.exports = (sequelize, DataTypes) => {
             field: 'stationId',
             type: DataTypes.INTEGER
         },
-        stateId: {
-            field: 'stateId',
-            type: DataTypes.INTEGER
-        },
         createdAt: {
             field: 'createdAt',
             defaultValue: Sequelize.fn('now'),
@@ -76,10 +72,6 @@ module.exports = (sequelize, DataTypes) => {
     Taxi.associate = function (models) {
         Taxi.belongsTo(models.Station, {
             foreignKey: 'stationId',
-            targetKey: 'id'
-        });
-        Taxi.belongsTo(models.AvailabilityState, {
-            foreignKey: 'stateId',
             targetKey: 'id'
         });
     };

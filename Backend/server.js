@@ -37,6 +37,9 @@ app.use("/v1/auth", require('./Routes/auth'));
 app.use("/v1/role", require('./Routes/role'));
 app.use("/v1/user", require('./Routes/user'));
 app.use("/v1/station", require('./Routes/station'));
+app.use("/v1/worker", require('./Routes/worker'));
+app.use("/v1/taxi", require('./Routes/taxi'));
+app.use("/v1/voyage", require('./Routes/voyage'));
 
 const server =  require('http').Server(app);
 

@@ -1,28 +1,25 @@
-const regexModule = require("../Modules/RegexModule");
-const passwordModule = require("../Modules/PasswordModule");
-//const converter = require("../Modules/turkishToEnglish")
 const models = require(".");
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    const AvailabilityState = sequelize.define('AvailabilityState', {
+    const Voyage = sequelize.define('Voyage', {
         id: {
             type: DataTypes.INTEGER,
             field:'id',
             primaryKey: true,
             autoIncrement: true
         },
-        state: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            field: 'state',
-            validate: {
-                notEmpty: {msg: 'AvailabilityState state cannot be empty.'}
-            }
-        },
         status: {
             type: DataTypes.INTEGER,
             defaultValue: 1
+        },
+        workerId: {
+            field: 'workerId',
+            type: DataTypes.INTEGER
+        },
+        taxiId: {
+            field: 'taxiId',
+            type: DataTypes.INTEGER
         },
         createdAt: {
             field: 'createdAt',
@@ -37,17 +34,21 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         charset: 'utf8mb4',
         collate: 'utf8mb4_unicode_ci',
-        tableName: 'AvailabilityStates',
+        tableName: 'Voyages',
         timestamps: true,
         indexes: [
-            {unique:true, fields:['state']}
+
         ]
     });
-    AvailabilityState.associate = function (models) {
-        /*Worker.belongsTo(models.Role, {
-            foreignKey: 'roleId',
+    Voyage.associate = function (models) {
+        Voyage.belongsTo(models.Worker, {
+            foreignKey: 'workerId',
             targetKey: 'id'
-        });*/
+        });
+        Voyage.belongsTo(models.Taxi, {
+            foreignKey: 'taxiId',
+            targetKey: 'id'
+        });
     };
-    return AvailabilityState;
+    return Voyage;
 };

@@ -1,4 +1,4 @@
-const Service = require('../Services/Database/Role');
+const Service = require('../Services/Database/Taxi');
 const models = require('../Models');
 module.exports = {
     getTableName: () => {
@@ -11,7 +11,7 @@ module.exports = {
                 let response = {status: 200, content: {success: true, result: result}};
                 res.status(response.status).json(response.content);
             } else {
-                let response = {status: 400, content: {success:false, message:"ERR_ROLE_DOESNT_EXISTS"}};
+                let response = {status: 400, content: {success:false, message:"ERR_TAXI_DOESNT_EXISTS"}};
                 res.status(response.status).json(response.content);
             }
         }).catch((err) => {
@@ -25,7 +25,7 @@ module.exports = {
             let response = {status: 200, content: {success:true, result:result[1]}};
             res.status(response.status).json(response.content);
         }).catch((err) => {
-            let response = {status: 400, content: {success:false, message:err.message}};
+            let response = {status: 500, content: {success:false, message:err.message}};
             return res.status(response.status).json(response.content)
         })
     },
@@ -36,7 +36,7 @@ module.exports = {
                 let response = {status: 201, content: {success:true, result:result[1]}};
                 res.status(response.status).json(response.content);
             } else {
-                let response = {status: 400, content: {success:false, message:"ERR_ROLE_INSERT"}};
+                let response = {status: 400, content: {success:false, message:"ERR_TAXI_INSERT"}};
                 return res.status(response.status).json(response.content)
             }
         }).catch((err) => {
@@ -51,7 +51,7 @@ module.exports = {
                 let response = {status: 200, content: {success:true, result:result[1]}};
                 res.status(response.status).json(response.content);
             } else {
-                let response = {status: 400, content: {success:false, message:"ERR_ROLE_UPDATE"}};
+                let response = {status: 400, content: {success:false, message:"ERR_TAXI_UPDATE"}};
                 return res.status(response.status).json(response.content)
             }
         }).catch((err) => {
@@ -66,11 +66,11 @@ module.exports = {
                 let response = {status: 200, content: {success: true, result: result}};
                 res.status(response.status).json(response.content);
             } else {
-                let response = {status: 400, content: {success:false, message:"ERR_ROLE_DOESNT_EXISTS"}};
+                let response = {status: 400, content: {success:false, message:"ERR_TAXI_DOESNT_EXISTS"}};
                 res.status(response.status).json(response.content);
             }
         }).catch((err) => {
-            let response = {status: 500, content: {success: true, message: err.message}};
+            let response = {status: 500, content: {success: false, message: err.message}};
             res.status(response.status).json(response.content);
         })
     },
