@@ -29,6 +29,16 @@ module.exports = {
             return res.status(response.status).json(response.content)
         })
     },
+    getView: (req, res, next) => {
+        Service.DATABASE_ENGINE.getView(req.query)
+        .then((result) => {
+            let response = {status: 200, content: {success:true, result:result[1]}};
+            res.status(response.status).json(response.content);
+        }).catch((err) => {
+            let response = {status: 500, content: {success:false, message:err.message}};
+            return res.status(response.status).json(response.content)
+        })
+    },
     insert : (req, res, next) => {
         Service.DATABASE_ENGINE.insert(req.body)
         .then((result) => {

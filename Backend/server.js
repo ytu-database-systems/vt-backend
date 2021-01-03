@@ -47,7 +47,7 @@ const server =  require('http').Server(app);
 models.sequelize.authenticate()
     .then(() => {
         console.log("Connected to DB.");
-            models.sequelize.sync({force:false, alter:true}).then(() => {
+            models.sequelize.sync({force:false, alter:false}).then(() => {
                 server.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
                     console.log(`Running on http://${process.env.APP_HOST}:${process.env.APP_PORT}`);
                 });

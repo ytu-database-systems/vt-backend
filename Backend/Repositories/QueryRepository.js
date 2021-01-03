@@ -101,6 +101,9 @@ module.exports = {
             }
 
         },
+        WORKER : {
+            GET_WORKERS_THAT_HIGHER_SALARY_THAN_THEIR_MANAGER : () => {return `SELECT * FROM "Workers_Salary_View";`}
+        },
         USER: {
             CHECK_IF_EXISTS : (requestData) => {return `SELECT * FROM "Users" WHERE username='${requestData.username}'`},
             SELECT_SINGLE_BY_ID : (requestData) => {return `SELECT * FROM "Users" WHERE id='${requestData.id}'`},

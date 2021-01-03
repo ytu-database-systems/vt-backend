@@ -36,6 +36,15 @@ const _this = module.exports = {
                 throw new Error(errorMessage);
             }
         },
+        getView: async (requestData) => {
+            try {
+                return await models.sequelize.query(QueryRepository.CUSTOM_QUERIES.WORKER.GET_WORKERS_THAT_HIGHER_SALARY_THAN_THEIR_MANAGER(_this.UTILITY.getTableName()));
+            } catch (e) {
+                let errorMessage = `ERR -> Service.Worker.DATABASE_ENGINE.getView() : ${e}`;
+                console.log(errorMessage);
+                throw new Error(errorMessage);
+            }
+        },
         update: async (requestData) => {
             try {
                 return await models.sequelize.query(QueryRepository.CUSTOM_QUERIES.GENERAL.UPDATE(_this.UTILITY.getTableName(), requestData));

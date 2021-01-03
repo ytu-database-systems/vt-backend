@@ -45,7 +45,7 @@ module.exports = {
             try {
                 return await models.sequelize.query(QueryRepository.CUSTOM_QUERIES.GENERAL.DELETE(Station.tableName, requestData));
             } catch (e) {
-                console.log(`ERR -> Service.Station.DATABASE_ENGINE.get() : ${e}`);
+                console.log(`ERR -> Service.Station.DATABASE_ENGINE.delete() : ${e}`);
                 throw e;
             }
         },
